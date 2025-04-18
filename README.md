@@ -2,6 +2,9 @@ NETFLIX GPT
 
 -Created React app using Vite
 -Configured TailwindCss
+-Header
+-Login Form
+-Sign up Form
 
 
 

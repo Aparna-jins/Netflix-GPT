@@ -1,10 +1,10 @@
 
-
+import Body from "./Components/Body"
 function App() {
 
   return (
     <>
-      <div className='text-xl text-blue-900'>Namaste All</div>
+      <Body/>
     </>
   )
 }
