@@ -1,21 +1,90 @@
 import React, { useState, useRef } from "react";
 import Header from "./Header";
 import { checkValidData } from "../Utils/validate.js";
+import { auth } from "../Utils/firebase.js";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { addUser } from "../Utils/userSlice.js";
+import { USER_URL } from "../Utils/Constants";
+import { useDispatch } from "react-redux";
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
-  const [errorMessage,setErrorMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState("");
+  const dispatch = useDispatch();
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
 
+  
   const handleButtonClick = (e) => {
     e.preventDefault();
-    const error=checkValidData(email.current.value, password.current.value);
-    setErrorMessage (error)
+    const message = checkValidData(email.current.value, password.current.value);
+    setErrorMessage(message);
+    if (message) return;
 
+    if (!isSignIn) {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user,name.current.value,USER_URL,"jjjjjjjjjjjjjj")
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: USER_URL,
+          })
+            .then(() => {
+              
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+              
+            })
+            .catch((error) => {
+              console.log(error,"1111111111")
+              setErrorMessage(error.message);
+            });
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          setErrorMessage(errorMessage);
+          
+          // ..
+        });
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user)
+      
+        
+        })
+        .catch((error) => {
+          setErrorMessage(error.message);
+        });
+    }
   };
   return (
     <div>
-      <Header />
+      <Header location="login" />
       <div className="absolute">
         <img
           alt="background image"
@@ -28,6 +97,7 @@ const Login = () => {
         </h2>
         {!isSignIn ? (
           <input
+          ref={name}
             type="text"
             placeholder="Full Name"
             className="p-2 my-5 w-full bg-gray-700"
@@ -48,7 +118,7 @@ const Login = () => {
         <p className="text-red-500 font-bold py-4 ">{errorMessage}</p>
         <button
           className="py-2 my-4 bg-red-700 w-full rounded-lg"
-          onClick={(e)=>handleButtonClick(e)}
+          onClick={(e) => handleButtonClick(e)}
         >
           {isSignIn ? "Sign In" : "Sign Up"}
         </button>
