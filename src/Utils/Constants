@@ -1,1 +1,14 @@
 export const USER_URL="https://occ-0-6501-3662.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABXz4LMjJFidX8MxhZ6qro8PBTjmHbxlaLAbk45W1DXbKsAIOwyHQPiMAuUnF1G24CLi7InJHK4Ge4jkXul1xIW49Dr5S7fc.png?r=e6e"
+
+export const OPTIONS={
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMjBlMmI0MjAwNTNkMDg5ZTkyZDQzMGI3NGQ3ZTUxMiIsIm5iZiI6MTc0NTQyOTc3OS41NTksInN1YiI6IjY4MDkyNTEzMjc2YmY2NGU0MWFiNzBiNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4DhUqe81cpdSwpBC_MJVqyolM-gb2KuYUJeXZRTPv7E'
+    }
+}
+export const IMG_CDN = "https://image.tmdb.org/t/p/w200"
+export const BG_URL="https://assets.nflxext.com/ffe/siteui/vlv3/fc2c345e-5991-4917-be24-cd328b62cc3f/web_tall_panel/IN-en-20250414-TRIFECTA-perspective_0f1fb403-6efb-4223-8f10-cfd1a902f22c_large.jpg"
+export const OPENAI_KEY="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"
+
+export const GEMINI_KEY="AIzaSyBDyDSvtB1jqWVPwuqjaWtBsSZHKLjsBzE"

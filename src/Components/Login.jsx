@@ -10,6 +10,7 @@ import {
 import { addUser } from "../Utils/userSlice.js";
 import { USER_URL } from "../Utils/Constants";
 import { useDispatch } from "react-redux";
+import { BG_URL } from "../Utils/Constants";
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -32,9 +33,9 @@ const Login = () => {
         password.current.value
       )
         .then((userCredential) => {
-          // Signed up
+          
           const user = userCredential.user;
-          console.log(user,name.current.value,USER_URL,"jjjjjjjjjjjjjj")
+        
           updateProfile(user, {
             displayName: name.current.value,
             photoURL: USER_URL,
@@ -54,7 +55,7 @@ const Login = () => {
               
             })
             .catch((error) => {
-              console.log(error,"1111111111")
+            
               setErrorMessage(error.message);
             });
         })
@@ -72,8 +73,9 @@ const Login = () => {
       )
         .then((userCredential) => {
           // Signed in
+          // eslint-disable-next-line no-unused-vars
           const user = userCredential.user;
-          console.log(user)
+    
       
         
         })
@@ -88,7 +90,7 @@ const Login = () => {
       <div className="absolute">
         <img
           alt="background image"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/fc2c345e-5991-4917-be24-cd328b62cc3f/web_tall_panel/IN-en-20250414-TRIFECTA-perspective_0f1fb403-6efb-4223-8f10-cfd1a902f22c_large.jpg"
+          src={BG_URL}
         />
       </div>
       <form className="w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white opacity-90">
